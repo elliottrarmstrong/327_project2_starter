@@ -8,16 +8,18 @@
 //============================================================================
 //	TODO add necessary includes here
 #include "array_functions.h"
+#include "constants.h"
+#include "utilities.h"
 #include <array>
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <sstream>
 using namespace std;
 //============================================================================
 
 //============================================================================
 //	stuff you will need
-std::string input = "testdata_full.txt";
 //============================================================================
 //TODO define a structure to track words and number of times they occur
 
@@ -25,21 +27,26 @@ std::string input = "testdata_full.txt";
 
 //TODO add variable to keep track of next available slot in array
 
+
+
 //TODO define all functions in header file
 
 //Zero out array that tracks words and their occurances
 void clearArray(){
-
+return;
 }
 
 //How many unique words are in array
 int getArraySize(){
-
+return -1;
 }
 
 //Get data at a particular location
-int getArrayWorld_NumbOccurAt(int i){
-return -1;
+std::string getArrayWordAt(int i){
+	return "";
+}
+int getArrayWord_NumbOccur_At(int i){
+	return 0;
 }
 
 /*Loop through whole file, one line at a time
@@ -47,31 +54,32 @@ return -1;
  * returns false: myfstream is not open
  *         true: otherwise*/
 bool processFile(std::fstream &myfstream){
-return false;
+	return false;
 }
 
 
 /*Take 1 line and extract all the tokens from it
 feed each token to processToken for recording*/
 void processLine(std::string &myString){
-
+	return;
 }
 
 //Keep track of how many times each token seen
 void processToken(std::string &token){
-
+	return;
 }
 
 
 /*If you are debugging the file must be in the project parent directory
   in this case Project2 with the .project and .cProject files*/
-bool openFile(std::fstream& myfile){
-return false;
+bool openFile(std::fstream& myfile, const std::string& myFileName,
+		std::ios_base::openmode mode = std::ios_base::in){
+	return false;
 }
 
 //Iff myfile is open then close it
 void closeFile(std::fstream& myfile){
-
+	return;
 }
 
 /* Serializes all content in myEntryArray to file outputfilename
@@ -80,7 +88,7 @@ void closeFile(std::fstream& myfile){
  * 			SUCCESS if all data is written and outputfilename closes OK
  * */
 int writeArraytoFile(const std::string &outputfilename){
-return -1;
+	return -1;
 }
 
 /*
@@ -89,11 +97,8 @@ return -1;
  * The presence of the enum implies a switch statement based on its value
  */
 void sortArray(constants::sortOrder so){
-
+	return;
 }
 
 
 //TODO look in utilities.h for useful functions, particularly strip_unwanted_chars!
-int main(){
-return 0;
-}
