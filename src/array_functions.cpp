@@ -1,7 +1,7 @@
 /*arrray_functions.cpp
  *
  *Elliott Armstrong -- elliott.armstrong.17@cnu.edu
- *Version 16.09.2019 
+ *Version 16.09.2019
  *
  */
 
@@ -22,6 +22,11 @@ using namespace std;
 //	stuff you will need
 //============================================================================
 //TODO define a structure to track words and number of times they occur
+struct entry
+{
+	string word;
+	int num_occurances;
+};
 
 //TODO add a global array of entry structs (global to this file)
 
@@ -33,7 +38,7 @@ using namespace std;
 
 //Zero out array that tracks words and their occurances
 void clearArray(){
-return;
+	return;
 }
 
 //How many unique words are in array
@@ -73,7 +78,7 @@ void processToken(std::string &token){
 /*If you are debugging the file must be in the project parent directory
   in this case Project2 with the .project and .cProject files*/
 bool openFile(std::fstream& myfile, const std::string& myFileName,
-		std::ios_base::openmode mode = std::ios_base::in){
+		std::ios_base::openmode mode){
 	return false;
 }
 
