@@ -51,10 +51,10 @@ int getArraySize(){
 
 //Get data at a particular location
 std::string getArrayWordAt(int i){
-	return "";
+	return words[i].word;
 }
 int getArrayWord_NumbOccur_At(int i){
-	return 0;
+	return words[i].num_occurances;
 }
 
 /*Loop through whole file, one line at a time
