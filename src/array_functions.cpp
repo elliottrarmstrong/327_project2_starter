@@ -37,8 +37,9 @@ int next_slot = 0;
 
 //Zero out array that tracks words and their occurances
 void clearArray(){
-	for(int i = 0; i <= MAX_WORDS-1; i++){
-
+	for(int i = 0; i < MAX_WORDS; i++){
+		words[i].word = "";
+		words[i].num_occurances = 0;
 	}
 	return;
 }
