@@ -62,13 +62,9 @@ int getArrayWord_NumbOccur_At(int i){
  * returns false: myfstream is not open
  *         true: otherwise*/
 bool processFile(std::fstream &myfstream){
-	//string line;
-	/*if(myfstream.is_open()){
-		while(!myfstream.eof()){
-			//processLine(line);
-		}
+	if(myfstream.is_open()){
 		return true;
-	}*/
+	}
 	return false;
 }
 
@@ -86,6 +82,7 @@ void processLine(std::string &myString){
 
 //Keep track of how many times each token seen
 void processToken(std::string &token){
+	//next_slot += 1;
 	return;
 }
 
@@ -115,7 +112,10 @@ void closeFile(std::fstream& myfile){
  * 			SUCCESS if all data is written and outputfilename closes OK
  * */
 int writeArraytoFile(const std::string &outputfilename){
-	return -1;
+	/*if(!openFile(outputfilename)){
+		return FAIL_FILE_DID_NOT_OPEN;
+	}*/
+	return SUCCESS;
 }
 
 /*
