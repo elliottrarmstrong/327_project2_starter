@@ -1,7 +1,7 @@
 /*arrray_functions.cpp
  *
  *Elliott Armstrong -- elliott.armstrong.17@cnu.edu
- *Version 16.09.2019
+ *Version 20.09.2019
  *
  */
 
@@ -16,6 +16,7 @@
 #include <string>
 #include <sstream>
 using namespace std;
+using namespace constants;
 //============================================================================
 
 //============================================================================
@@ -29,21 +30,22 @@ struct entry
 };
 
 //TODO add a global array of entry structs (global to this file)
+entry words[MAX_WORDS];
 
 //TODO add variable to keep track of next available slot in array
-
-
-
-//TODO define all functions in header file
+int next_slot = 0;
 
 //Zero out array that tracks words and their occurances
 void clearArray(){
+	for(int i = 0; i <= MAX_WORDS-1; i++){
+
+	}
 	return;
 }
 
 //How many unique words are in array
 int getArraySize(){
-return -1;
+	return next_slot;
 }
 
 //Get data at a particular location
@@ -59,6 +61,13 @@ int getArrayWord_NumbOccur_At(int i){
  * returns false: myfstream is not open
  *         true: otherwise*/
 bool processFile(std::fstream &myfstream){
+	//string line;
+	/*if(myfstream.is_open()){
+		while(!myfstream.eof()){
+			//processLine(line);
+		}
+		return true;
+	}*/
 	return false;
 }
 
@@ -66,6 +75,11 @@ bool processFile(std::fstream &myfstream){
 /*Take 1 line and extract all the tokens from it
 feed each token to processToken for recording*/
 void processLine(std::string &myString){
+	stringstream ss(myString);
+	string tempToken;
+	while(getline(ss, tempToken, CHAR_TO_SEARCH_FOR)){
+		processToken(tempToken);
+	}
 	return;
 }
 
@@ -79,11 +93,18 @@ void processToken(std::string &token){
   in this case Project2 with the .project and .cProject files*/
 bool openFile(std::fstream& myfile, const std::string& myFileName,
 		std::ios_base::openmode mode){
+	myfile.open(myFileName, mode);
+	if(myfile.is_open()){
+		return true;
+	}
 	return false;
 }
 
 //Iff myfile is open then close it
 void closeFile(std::fstream& myfile){
+	if(myfile.is_open()){
+		myfile.close();
+	}
 	return;
 }
 
