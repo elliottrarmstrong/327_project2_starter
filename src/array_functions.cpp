@@ -1,7 +1,7 @@
 /*arrray_functions.cpp
  *
  *Elliott Armstrong -- elliott.armstrong.17@cnu.edu
- *Version 20.09.2019
+ *Version 23.09.2019
  *
  */
 
@@ -22,17 +22,15 @@ using namespace constants;
 //============================================================================
 //	stuff you will need
 //============================================================================
-//TODO define a structure to track words and number of times they occur
+
 struct entry
 {
 	string word;
 	int num_occurances;
 };
 
-//TODO add a global array of entry structs (global to this file)
 entry words[MAX_WORDS];
 
-//TODO add variable to keep track of next available slot in array
 int next_slot = 0;
 
 //Zero out array that tracks words and their occurances
@@ -82,7 +80,11 @@ void processLine(std::string &myString){
 
 //Keep track of how many times each token seen
 void processToken(std::string &token){
-	//next_slot += 1;
+	for(int j = 0; j < MAX_WORDS; j++){
+		if(true){
+
+		}
+	}
 	return;
 }
 
@@ -124,7 +126,17 @@ int writeArraytoFile(const std::string &outputfilename){
  * The presence of the enum implies a switch statement based on its value
  */
 void sortArray(constants::sortOrder so){
-	return;
+	switch(so){
+	case ASCENDING:
+
+		return;
+	case DESCENDING:
+		return;
+	case NUMBER_OCCURRENCES:
+		return;
+	case NONE:
+		return;
+	}
 }
 
 
