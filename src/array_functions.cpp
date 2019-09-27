@@ -131,6 +131,11 @@ void closeFile(std::fstream &myfile){
  * 			SUCCESS if all data is written and outputfilename closes OK
  * */
 int writeArraytoFile(const std::string &outputfilename){
+	ofstream outputfile;
+	outputfile.open(outputfilename);
+	if(!outputfile.is_open()){
+		return FAIL_FILE_DID_NOT_OPEN;
+	}
 	return SUCCESS;
 }
 
