@@ -87,14 +87,20 @@ void processLine(std::string &myString){
 //Keep track of how many times each token seen
 void processToken(std::string &token){
 	bool seen = false;
+	std::string tempword;
+	std::string temptoken;
 	strip_unwanted_chars(token);
 
 	if(token == ""){
 		return;
 	}
 
-	for(int j = 0; j < MAX_WORDS; j++){
-		if(words[j].word == token){
+	for(int j = 0; j < next_slot; j++){
+		tempword = words[j].word;
+		toUpper(tempword);
+		temptoken = token;
+		toUpper(temptoken);
+		if(tempword == temptoken){
 			seen = true;
 			words[j].num_occurances++;
 		}
@@ -148,7 +154,7 @@ int writeArraytoFile(const std::string &outputfilename){
 	}
 
 	for(int m = 0; m < next_slot; m++){
-		outputfile << words[m].word + " " + intToString(words[m].num_occurances);
+		outputfile << words[m].word + " " + intToString(words[m].num_occurances) + "\n";
 	}
 	return SUCCESS;
 }
@@ -159,29 +165,31 @@ int writeArraytoFile(const std::string &outputfilename){
  * The presence of the enum implies a switch statement based on its value
  */
 void sortArray(constants::sortOrder so){
-	//switch(so){
-	//case ASCENDING:
-		entry tmp;
-		tmp.word = "";
-		tmp.num_occurances = 0;
-		for(int k = 0; k < MAX_WORDS-1; k++){
-			if(words[k].word.compare(words[k+1].word) > 0){
-				tmp = words[k];
-				words[k] = words[k+1];
-				words[k+1] = tmp;
-				k = 0;
+	switch(so){
+		case ASCENDING:
+			for(int k = 0; k < next_slot-1; k++){
+				if(words[k].word > (words[k+1].word)){
+					entry tmp;
+					tmp.num_occurances = 0;
+					tmp.word = "";
+					tmp.word = words[k].word;
+					tmp.num_occurances = words[k].num_occurances;
+					words[k].word = words[k+1].word;
+					words[k].num_occurances = words[k+1].num_occurances;
+					words[k+1].word = tmp.word;
+					words[k+1].num_occurances = tmp.num_occurances;
+					k = 0;
+				}
 			}
-		break;
-		}
-	/*case DESCENDING:
-		break;
-	case NUMBER_OCCURRENCES:
-		break;
-	case NONE:
-		break;
-	return;*/
-		return;
+			break;
+		case DESCENDING:
+			break;
+		case NUMBER_OCCURRENCES:
+			break;
+		case NONE:
+			break;
 	}
+}
 
 
 //TODO look in utilities.h for useful functions, particularly strip_unwanted_chars!
