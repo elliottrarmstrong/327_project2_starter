@@ -1,7 +1,7 @@
 /*arrray_functions.cpp
  *
  *Elliott Armstrong -- elliott.armstrong.17@cnu.edu
- *Version 23.09.2019
+ *Version 27.09.2019
  *
  */
 
@@ -19,18 +19,17 @@ using namespace std;
 using namespace constants;
 //============================================================================
 
-//============================================================================
-//	stuff you will need
-//============================================================================
-
+//the definition of the entry structure
 struct entry
 {
 	string word;
 	int num_occurances;
 };
 
+//An array of type entry
 entry words[MAX_WORDS];
 
+//A variable to keep track of the next available slot
 int next_slot = 0;
 
 //Zero out array that tracks words and their occurances
@@ -60,7 +59,12 @@ int getArrayWord_NumbOccur_At(int i){
  * returns false: myfstream is not open
  *         true: otherwise*/
 bool processFile(std::fstream &myfstream){
+	std::string line;
 	if(myfstream.is_open()){
+		/*for(std::string line; getline(myfstream,line)){
+		prcessesLine(line);
+		}*/
+
 		return true;
 	}
 	return false;
@@ -80,11 +84,20 @@ void processLine(std::string &myString){
 
 //Keep track of how many times each token seen
 void processToken(std::string &token){
+	bool seen = false;
 	for(int j = 0; j < MAX_WORDS; j++){
-		if(true){
-
+		if(words[j].word == token){
+			seen = true;
+			words[j].num_occurances++;
 		}
 	}
+
+	if(!seen){
+		words[next_slot].word = token;
+		words[next_slot].num_occurances++;
+		next_slot++;
+	}
+
 	return;
 }
 
@@ -114,9 +127,6 @@ void closeFile(std::fstream& myfile){
  * 			SUCCESS if all data is written and outputfilename closes OK
  * */
 int writeArraytoFile(const std::string &outputfilename){
-	/*if(!openFile(outputfilename)){
-		return FAIL_FILE_DID_NOT_OPEN;
-	}*/
 	return SUCCESS;
 }
 
@@ -126,18 +136,29 @@ int writeArraytoFile(const std::string &outputfilename){
  * The presence of the enum implies a switch statement based on its value
  */
 void sortArray(constants::sortOrder so){
-	switch(so){
-	case ASCENDING:
-
-		return;
-	case DESCENDING:
-		return;
+	//switch(so){
+	//case ASCENDING:
+		entry tmp;
+		tmp.word = "";
+		tmp.num_occurances = 0;
+		for(int k = 0; k < MAX_WORDS-1; k++){
+			if(words[k].word.compare(words[k+1].word) > 0){
+				tmp = words[k];
+				words[k] = words[k+1];
+				words[k+1] = tmp;
+				k = 0;
+			}
+		break;
+		}
+	/*case DESCENDING:
+		break;
 	case NUMBER_OCCURRENCES:
-		return;
+		break;
 	case NONE:
+		break;
+	return;*/
 		return;
 	}
-}
 
 
 //TODO look in utilities.h for useful functions, particularly strip_unwanted_chars!
