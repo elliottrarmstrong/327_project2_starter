@@ -167,29 +167,77 @@ int writeArraytoFile(const std::string &outputfilename){
 void sortArray(constants::sortOrder so){
 	switch(so){
 		case ASCENDING:
-			for(int k = 0; k < next_slot-1; k++){
-				if(words[k].word > (words[k+1].word)){
-					entry tmp;
-					tmp.num_occurances = 0;
-					tmp.word = "";
-					tmp.word = words[k].word;
-					tmp.num_occurances = words[k].num_occurances;
-					words[k].word = words[k+1].word;
-					words[k].num_occurances = words[k+1].num_occurances;
-					words[k+1].word = tmp.word;
-					words[k+1].num_occurances = tmp.num_occurances;
-					k = 0;
+			for(int k = 0; k < next_slot; k++){
+				for(int l = k+1; l < next_slot; l++){
+
+					std::string one = words[k].word;
+					toUpper(one);
+
+					std::string two = words[l].word;
+					toUpper(two);
+
+					if(one > two){
+						entry tmp;
+
+						tmp.word = words[k].word;
+						tmp.num_occurances = words[k].num_occurances;
+
+						words[k].word = words[l].word;
+						words[k].num_occurances = words[l].num_occurances;
+
+						words[l].word = tmp.word;
+						words[l].num_occurances = tmp.num_occurances;
+					}
 				}
 			}
 			break;
+
 		case DESCENDING:
+			for(int k = 0; k < next_slot; k++){
+				for(int l = k+1; l < next_slot; l++){
+
+					std::string one = words[k].word;
+					toUpper(one);
+
+					std::string two = words[l].word;
+					toUpper(two);
+
+					if(one > two){
+						entry tmp;
+
+						tmp.word = words[k].word;
+						tmp.num_occurances = words[k].num_occurances;
+
+						words[k].word = words[l].word;
+						words[k].num_occurances = words[l].num_occurances;
+
+						words[l].word = tmp.word;
+						words[l].num_occurances = tmp.num_occurances;
+					}
+				}
+			}
 			break;
+
 		case NUMBER_OCCURRENCES:
+			for(int k = 0; k < next_slot; k++){
+				for(int l = k+1; l < next_slot; l++){
+					if(words[k].num_occurances > words[k].num_occurances){
+						entry tmp;
+
+						tmp.word = words[k].word;
+						tmp.num_occurances = words[k].num_occurances;
+
+						words[k].word = words[l].word;
+						words[k].num_occurances = words[l].num_occurances;
+
+						words[l].word = tmp.word;
+						words[l].num_occurances = tmp.num_occurances;
+					}
+				}
+			}
 			break;
+
 		case NONE:
 			break;
 	}
 }
-
-
-//TODO look in utilities.h for useful functions, particularly strip_unwanted_chars!
