@@ -38,6 +38,7 @@ void clearArray(){
 		words[i].word = "";
 		words[i].num_occurances = 0;
 	}
+	next_slot = 0;
 	return;
 }
 
@@ -61,9 +62,10 @@ int getArrayWord_NumbOccur_At(int i){
 bool processFile(std::fstream &myfstream){
 	std::string line;
 	if(myfstream.is_open()){
-		/*for(std::string line; getline(myfstream,line)){
-		prcessesLine(line);
-		}*/
+		while(!myfstream.eof()){
+			getline(myfstream, line);
+			processLine(line);
+		}
 
 		return true;
 	}
@@ -85,8 +87,10 @@ void processLine(std::string &myString){
 //Keep track of how many times each token seen
 void processToken(std::string &token){
 	bool seen = false;
+	std::string clean_token;
+	clean_token = strip_unwanted_chars(token);
 	for(int j = 0; j < MAX_WORDS; j++){
-		if(words[j].word == token){
+		if(words[j].word == clean_token){
 			seen = true;
 			words[j].num_occurances++;
 		}
@@ -113,8 +117,8 @@ bool openFile(std::fstream& myfile, const std::string& myFileName,
 	return false;
 }
 
-//Iff myfile is open then close it
-void closeFile(std::fstream& myfile){
+//If myfile is open then close it
+void closeFile(std::fstream &myfile){
 	if(myfile.is_open()){
 		myfile.close();
 	}
