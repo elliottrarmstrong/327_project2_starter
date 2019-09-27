@@ -87,10 +87,14 @@ void processLine(std::string &myString){
 //Keep track of how many times each token seen
 void processToken(std::string &token){
 	bool seen = false;
-	std::string clean_token;
-	clean_token = strip_unwanted_chars(token);
+	strip_unwanted_chars(token);
+
+	if(token == ""){
+		return;
+	}
+
 	for(int j = 0; j < MAX_WORDS; j++){
-		if(words[j].word == clean_token){
+		if(words[j].word == token){
 			seen = true;
 			words[j].num_occurances++;
 		}
@@ -132,15 +136,20 @@ void closeFile(std::fstream &myfile){
  * */
 int writeArraytoFile(const std::string &outputfilename){
 	ofstream outputfile;
-	outputfile.open(outputfilename);
+	outputfile.open(outputfilename.c_str());
+
 	if(!outputfile.is_open()){
 		return FAIL_FILE_DID_NOT_OPEN;
 	}
+
 
 	if(next_slot == 0){
 		return FAIL_NO_ARRAY_DATA;
 	}
 
+	for(int m = 0; m < next_slot; m++){
+		outputfile << words[m].word + " " + intToString(words[m].num_occurances);
+	}
 	return SUCCESS;
 }
 
