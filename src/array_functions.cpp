@@ -136,6 +136,11 @@ int writeArraytoFile(const std::string &outputfilename){
 	if(!outputfile.is_open()){
 		return FAIL_FILE_DID_NOT_OPEN;
 	}
+
+	if(next_slot == 0){
+		return FAIL_NO_ARRAY_DATA;
+	}
+
 	return SUCCESS;
 }
 
